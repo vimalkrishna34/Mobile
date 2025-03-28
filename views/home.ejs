@@ -3,105 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            text-align: center;
-            margin: 40px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header h1 {
-            font-size: 4rem;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .product-name {
-            font-size: 1.5rem;
-            margin: 0 0 10px 0;
-            color: #2c3e50;
-        }
-        
-        .product-brand {
-            font-size: 1rem;
-            color: #7f8c8d;
-            margin: 0 0 5px 0;
-        }
-        
-        .product-price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #27ae60;
-            margin: 10px 0 0 0;
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .products-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Mobile Collection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <h1>Welcome to Our Store!</h1>
-    </div>
-    
-    <% if(locals.data) { %>
-        <div class="products-container">
-            <% for(let i = 0; i < data.length; i++) { %>
-                <div class="product-card">
-                    <h2 class="product-name"><%= data[i].name %></h2>
-                    <p class="product-brand"><%= data[i].brand %></p>
-                    <p class="product-price">$<%= data[i].prise %></p>
+    <%- include('Partials/Navbar') %>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Mobile Collection</h1>
+        
+        <div class="text-end mb-3">
+            <a href="/add" class="btn btn-primary">Add New Mobile</a>
+        </div>
+
+        <div class="row">
+            <% data.forEach(mobile => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= mobile.name %></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><%= mobile.brand %></h6>
+                            <p class="card-text">Price: $<%= mobile.prise %></p>
+                            <a href="/<%= mobile._id %>" class="btn btn-info btn-sm">Details</a>
+                            <a href="/edit/<%= mobile._id %>" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="/delete/<%= mobile._id %>" method="POST" style="display: inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            <% } %>
+            <% }); %>
         </div>
-    <% } else { %>
-        <div class="no-products">
-            <p style="text-align: center; font-size: 1.2rem; color: #7f8c8d;">
-                No products available at the moment.
-            </p>
-        </div>
-    <% } %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
