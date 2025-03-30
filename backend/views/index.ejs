@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            padding: 15px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #06c;
+        }
+        .navbar nav a {
+            color: #f5f5f7;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .navbar nav a:hover {
+            color: #06c;
+        }
+        .sign-in {
+            background-color: #06c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        .hero-content {
+            flex: 1;
+            max-width: 50%;
+            text-align: left;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .cta-button {
+            background-color: #06c;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #147ce5;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+            background-color: white;
+        }
+        .category {
+            background-color: #f5f5f7;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #d2d2d7;
+        }
+        .category:hover {
+            background-color: #06c;
+            color: white;
+            border-color: #06c;
+        }
+
+        /* Deals Section */
+        .deals {
+            padding: 40px 30px;
+            text-align: center;
+            background-color: #f5f5f7;
+        }
+        .deals h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+        .product-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            flex: 1 1 250px;
+            max-width: 280px;
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #1d1d1f;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .discount {
+            text-decoration: line-through;
+            color: #86868b;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+        .add-to-cart {
+            background-color: #06c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 15px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart:hover {
+            background-color: #147ce5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #000;
+            color: #f5f5f7;
+        }
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">MOBILEHUB</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/compare">Compare</a>
+                <a href="/deals">Deals</a>
+                <a href="#">Accessories</a>
+            </nav>
+            <a href="/login" class="sign-in">Sign In</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2><%= heroTitle %></h2>
+                <p><%= heroSubtitle %></p>
+                <button class="cta-button">Shop Latest Models</button>
+            </div>
+            <div class="hero-image">
+                <img src="<%= heroImage %>" alt="Latest Smartphones">
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories">
+            <% if (categories && categories.length) { %>
+                <% categories.forEach(category => { %>
+                    <div class="category"><%= category.emoji %> <%= category.name %></div>
+                <% }) %>
+            <% } else { %>
+                <p>No categories available</p>
+            <% } %>
+        </section>
+
+        <!-- Deal of the Day -->
+        <section class="deals">
+            <h2>Hot Deals</h2>
+            <div class="product-list">
+                <% if (products && products.length) { %>
+                    <% products.forEach(product => { %>
+                        <div class="product-card">
+                            <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <h3><%= product.name %></h3>
+                            <p class="price">$<%= product.price %> <span class="discount">$<%= product.originalPrice %></span></p>
+                            <button class="add-to-cart">View Details</button>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No products available</p>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MobileHub. All smartphone brands and logos are trademarks of their respective owners.</p>
+    </footer>
+</body>
+</html>
