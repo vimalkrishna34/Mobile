@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gadgetTracker', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/connect1', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -53,9 +53,9 @@ app.get('/', async (req, res) => {
             { name: 'Vivo', emoji: '📱' }
         ],
         products: [
-            { name: 'Wireless Earbuds', price: 28, originalPrice: 40, image: 'https://i.pinimg.com/736x/9d/1f/06/9d1f06606fa55988738ee5f4569a6481.jpg' },
-            { name: 'Smart Speaker', price: 59, originalPrice: 80, image: 'https://i.pinimg.com/736x/7c/bc/fa/7cbcfa9c4131300069e502776b3827a6.jpg' },
-            { name: 'Gaming Headset', price: 99, originalPrice: 120, image: 'https://i.pinimg.com/736x/75/71/36/75713637d583deb96c7518087a34475a.jpg' }
+            { name: 'Samsung Galaxy S24Ultra', price: 1200, originalPrice: 1750, image: 'https://i.pinimg.com/736x/5b/d8/93/5bd893c5ec4277bc4cff54fbb3e79afb.jpg' },
+            { name: 'Samsung Galaxy S35Ultra', price: 1350, originalPrice: 1880, image: 'https://i.pinimg.com/736x/d9/82/12/d982123a83fe7a0f6c5ca92e5ea2d814.jpg' },
+            { name: 'Oppo reno 12pro', price: 399, originalPrice: 490, image: 'https://i.pinimg.com/736x/c4/83/b9/c483b9ed35618fff0e6dc9d26334fdf4.jpg' }
         ],
         user: req.session.user
     });
