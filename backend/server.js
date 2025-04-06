@@ -46,11 +46,11 @@ app.get('/', async (req, res) => {
         heroSubtitle: 'Find the best deals on top gadgets.',
         heroImage: 'https://cdn.dribbble.com/userupload/20190595/file/original-e4ef110c930aa3ed1b854934558a8fd4.gif',
         categories: [
-            { name: 'Mobile', emoji: '📱' },
-            { name: 'Audio', emoji: '🎧' },
-            { name: 'Computer', emoji: '🖥️' },
-            { name: 'Gaming', emoji: '🕹️' },
-            { name: 'Camera', emoji: '📷' }
+            { name: 'Apple', emoji: '📱' },
+            { name: 'Samsung', emoji: '📱' },
+            { name: 'Xiamoi', emoji: '📱' },
+            { name: 'Oppo', emoji: '📱' },
+            { name: 'Vivo', emoji: '📱' }
         ],
         products: [
             { name: 'Wireless Earbuds', price: 28, originalPrice: 40, image: 'https://i.pinimg.com/736x/9d/1f/06/9d1f06606fa55988738ee5f4569a6481.jpg' },
