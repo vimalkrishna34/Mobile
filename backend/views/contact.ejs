@@ -1,0 +1,388 @@
+<%- include('partials/header', { title: 'MobileHub - Contact Us' }) %>
+
+<div class="contact-container">
+  <div class="contact-hero">
+    <h1>Contact MobileHub Support</h1>
+    <p class="hero-subtext">Have questions about buying or selling mobile devices? Our team is here to help!</p>
+  </div>
+
+  <% if (typeof success !== 'undefined' && success) { %>
+    <div class="alert alert-success">
+      <i class="fas fa-check-circle"></i>
+      <% if (success === 'true') { %>
+        Your message has been sent successfully!
+      <% } else { %>
+        <%= success.replace(/\+/g, ' ') %>
+      <% } %>
+    </div>
+  <% } %>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error">
+      <i class="fas fa-exclamation-circle"></i>
+      <%= error %>
+    </div>
+  <% } %>
+
+  <div class="contact-content">
+    <div class="contact-form-container">
+      <form action="<%= typeof message !== 'undefined' && message ? '/contact/update/' + message._id : '/contact' %>" method="POST" class="mobilehub-form">
+        <% if (typeof message !== 'undefined' && message) { %>
+          <input type="hidden" name="_id" value="<%= message._id %>">
+        <% } %>
+        
+        <div class="form-group">
+          <label for="name">Mobile Name</label>
+          <input type="text" id="name" name="name" value="<%= typeof message !== 'undefined' && message ? message.name : '' %>" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" value="<%= typeof message !== 'undefined' && message ? message.email : '' %>" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Enter specifications</label>
+          <textarea id="message" name="message" rows="6" required><%= typeof message !== 'undefined' && message ? message.message : '' %></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <% if (typeof message !== 'undefined' && message) { %>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Update Message
+            </button>
+            <a href="/contact" class="btn btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </a>
+          <% } else { %>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          <% } %>
+        </div>
+      </form>
+    </div>
+
+    <div class="message-history">
+      <h2><i class="fas fa-history"></i> Your Support History</h2>
+      <% if (typeof messages !== 'undefined' && messages && messages.length > 0) { %>
+        <div class="messages-list">
+          <% messages.forEach(msg => { %>
+            <div class="message-card">
+              <div class="message-header">
+                <h3><%= msg.name %></h3>
+                <span class="message-date"><%= new Date(msg.createdAt).toLocaleString() %></span>
+              </div>
+              <div class="message-body">
+                <p><strong>Email:</strong> <%= msg.email %></p>
+                <p class="message-text"><%= msg.message %></p>
+              </div>
+              <div class="message-footer">
+                <a href="/contact/edit/<%= msg._id %>" class="btn btn-edit">
+                  <i class="fas fa-edit"></i> Edit
+                </a>
+                <form action="/contact/delete/<%= msg._id %>" method="POST" class="delete-form">
+                  <button type="submit" class="btn btn-delete">
+                    <i class="fas fa-trash-alt"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="empty-state">
+          <i class="fas fa-comment-slash"></i>
+          <p>No messages yet. Reach out with any questions about mobile devices!</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<style>
+  :root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --accent-color: #fd79a8;
+    --dark-color: #2d3436;
+    --light-color: #f5f6fa;
+    --text-color: #2d3436;
+    --text-light: #636e72;
+  }
+
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .contact-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.2);
+  }
+
+  .contact-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtext {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid #10b981;
+  }
+
+  .alert-error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-left: 4px solid #ef4444;
+  }
+
+  .contact-content {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .contact-form-container {
+    flex: 1;
+  }
+
+  .message-history {
+    flex: 1;
+  }
+
+  .mobilehub-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    outline: none;
+  }
+
+  .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #5649c0;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background-color: #b2bec3;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #636e72;
+    transform: translateY(-2px);
+  }
+
+  .message-history h2 {
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .message-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .message-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .message-header {
+    padding: 1.2rem 1.5rem;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .message-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--dark-color);
+  }
+
+  .message-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  .message-body {
+    padding: 1.5rem;
+  }
+
+  .message-body p {
+    margin: 0.5rem 0;
+  }
+
+  .message-text {
+    margin-top: 1rem !important;
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  .message-footer {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid #eee;
+  }
+
+  .btn-edit {
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .btn-edit:hover {
+    background-color: #8c7ae6;
+    color: white;
+  }
+
+  .btn-delete {
+    background-color: #ff7675;
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .btn-delete:hover {
+    background-color: #e84393;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .empty-state i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .empty-state p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .contact-content {
+      flex-direction: column;
+    }
+    
+    .contact-hero h1 {
+      font-size: 2rem;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

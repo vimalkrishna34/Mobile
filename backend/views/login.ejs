@@ -1,0 +1,303 @@
+<%- include('partials/navbar') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileHub - Find Your Favorite Mobile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .login-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .form-control {
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5649c0;
+            transform: translateY(-2px);
+        }
+        
+        .social-login .btn {
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 500;
+        }
+        
+        .btn-google {
+            background-color: #db4437;
+            color: white;
+        }
+        
+        .btn-facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #b2bec3;
+            margin: 20px 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dfe6e9;
+        }
+        
+        .divider::before {
+            margin-right: 10px;
+        }
+        
+        .divider::after {
+            margin-left: 10px;
+        }
+        
+        .phone-mockup {
+            position: relative;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        .phone-mockup img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .error-message {
+            color: #d63031;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 991.98px) {
+            .hero-section {
+                padding: 50px 0;
+            }
+            
+            .phone-mockup {
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0 min-vh-100">
+            <!-- Left Section - Hero -->
+            <div class="col-lg-6 hero-section d-flex align-items-center">
+                <div class="container py-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 mx-auto text-center text-lg-start">
+                            <h1 class="display-4 fw-bold mb-4">Welcome to <span class="text-warning">MobileHub</span></h1>
+                            <p class="lead mb-5">Find your favorite mobile at the best prices. Join thousands of sellers and buyers in our growing community.</p>
+                            
+                            <div class="row g-4 text-center">
+                                <div class="col-md-4">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <h5>Latest Models</h5>
+                                    <p class="small">Discover the newest smartphones</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-tags"></i>
+                                    </div>
+                                    <h5>Best Prices</h5>
+                                    <p class="small">Competitive pricing from trusted sellers</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h5>Secure</h5>
+                                    <p class="small">Safe and reliable transactions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Section - Login Form -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center py-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-10">
+                            <div class="login-container">
+                                <div class="login-header">
+                                    <h2 class="mb-0">Sign In</h2>
+                                    <p class="mb-0">Access your MobileHub account</p>
+                                </div>
+                                
+                                <div class="p-4 p-md-5">
+                                    <% if (errorMessage) { %>
+                                        <div class="alert alert-danger"><%= errorMessage %></div>
+                                    <% } %>
+                                    
+                                    <form action="/login" method="POST">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+                                            <div class="text-end mt-2">
+                                                <a href="/forgot-password" class="text-decoration-none small text-muted">Forgot password?</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d-grid mb-3">
+                                            <button type="submit" class="btn btn-primary btn-lg">
+                                                <i class="fas fa-sign-in-alt me-2"></i> Login
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="divider">or continue with</div>
+                                        
+                                        <div class="social-login d-grid gap-2 mb-4">
+                                            <button type="button" class="btn btn-google">
+                                                <i class="fab fa-google me-2"></i> Google
+                                            </button>
+                                            <button type="button" class="btn btn-facebook">
+                                                <i class="fab fa-facebook-f me-2"></i> Facebook
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <p class="mb-0">Don't have an account? <a href="/signup" class="text-decoration-none fw-bold" style="color: var(--primary-color);">Sign up</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Simple client-side validation -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                e.preventDefault();
+                alert('Please fill in both email and password fields');
+                return false;
+            }
+            
+            // Basic email format validation
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                e.preventDefault();
+                alert('Please enter a valid email address');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+</body>
+</html>
